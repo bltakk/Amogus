@@ -6,29 +6,28 @@
 <title>Շնորհավոր Մարտի 8</title>
 <style>
 body {
-  margin: 0;
+  margin:0;
   font-family: Georgia, serif;
-  text-align: center;
-  height: 100vh;
-  overflow: hidden;
-  background: #ffe6f2; /* светлый розовый фон */
+  text-align:center;
+  height:100vh;
+  overflow:hidden;
+  background: #ffe6f2;
   background-image: url('https://png.pngtree.com/png-vector/20230110/ourmid/pngtree-pink-flower-petal-decoration-png-image_6551619.png');
   background-repeat: repeat;
   background-size: 60px;
 }
 
-/* Карточка с поздравлением */
 .card {
-  position: absolute;
+  position:absolute;
   top:50%;
   left:50%;
-  transform: translate(-50%,-50%);
-  background: rgba(255,255,255,0.9);
-  padding: 30px 20px;
-  width: 90%;
-  max-width: 400px;
-  border-radius: 25px;
-  box-shadow: 0 0 25px rgba(255,182,193,0.4);
+  transform:translate(-50%,-50%);
+  background: rgba(255,255,255,0.95);
+  padding:30px 20px;
+  width:90%;
+  max-width:400px;
+  border-radius:25px;
+  box-shadow:0 0 25px rgba(255,182,193,0.4);
 }
 
 h1 {
@@ -41,58 +40,83 @@ h1 {
   font-size:1em;
   line-height:1.6em;
   color:#444;
-  margin-bottom: 20px;
+  min-height:80px; /* чтобы карточка не прыгала при смене текста */
 }
 
-/* Кнопка воспроизведения */
 button {
   padding: 10px 20px;
-  font-size: 1em;
-  border: none;
-  border-radius: 20px;
-  background: #d63384;
-  color: white;
-  cursor: pointer;
-  box-shadow: 0 0 10px rgba(214,51,132,0.4);
-  transition: background 0.3s;
+  font-size:1em;
+  border:none;
+  border-radius:20px;
+  background:#d63384;
+  color:white;
+  cursor:pointer;
+  box-shadow:0 0 10px rgba(214,51,132,0.4);
+  margin-top:10px;
 }
 
-button:hover {
-  background: #e7549f;
+button:hover { background:#e7549f; }
+
+.nav-btn {
+  cursor:pointer;
+  font-size:1.5em;
+  padding:0 10px;
+  color:#d63384;
+  user-select:none;
 }
+.nav-btn:hover { color:#e7549f; }
 </style>
 </head>
 <body>
 
 <div class="card">
-  <h1>🌸 Սիրելի կանայք և աղջիկներ 🌸</h1>
-  <p class="text">
-    Թող այս գեղեցիկ գարնանային օրը<br>
-    ձեզ պարգևի ջերմություն ու ժպիտներ։<br>
-    Դուք մեր համալսարանի գեղեցկությունն եք,<br>
-    ներշնչանքն ու պայծառ լույսը։<br>
-    Թող ձեր օրերը միշտ ծաղկեն<br>
-    երջանկությամբ և սիրով։
-  </p>
-  <button id="playBtn">▶ Վերցնել երաժշտությունը</button>
+  <h1>🌸 Շնորհավոր Մարտի 8 🌸</h1>
+  <p class="text" id="text">Այսօր է առաջին էջի տեքստը</p>
+  <div>
+    <span class="nav-btn" id="prev">&#8592;</span>
+    <span class="nav-btn" id="next">&#8594;</span>
+  </div>
+  <button id="playBtn">Միացնել երաժշտությունը 💐</button>
 </div>
 
-<!-- Музыка -->
 <audio id="music" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
+// Тексты для страниц (заглушки)
+const pages = [
+  "Այսօր է առաջին էջի տեքստը",
+  "Սա է երկրորդ էջը",
+  "Երրորդ էջի տեքստ",
+  "Չորրորդ էջի տեքստ",
+  "Հինգերորդ էջի տեքստ"
+];
+
+let current = 0;
+const textEl = document.getElementById("text");
+
+document.getElementById("prev").addEventListener("click", () => {
+  current = (current - 1 + pages.length) % pages.length;
+  textEl.textContent = pages[current];
+});
+
+document.getElementById("next").addEventListener("click", () => {
+  current = (current + 1) % pages.length;
+  textEl.textContent = pages[current];
+});
+
+// Кнопка музыки
 const music = document.getElementById("music");
 const btn = document.getElementById("playBtn");
 
 btn.addEventListener("click", () => {
   if (music.paused) {
     music.play();
-    btn.textContent = "⏸ Կանգնեցնել երաժշտությունը";
+    btn.textContent = "Կանգնեցնել երաժշտությունը 💐";
   } else {
     music.pause();
-    btn.textContent = "▶ Վերցնել երաժշտությունը";
+    btn.textContent = "Միացնել երաժշտությունը 💐";
   }
 });
 </script>
