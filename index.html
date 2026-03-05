@@ -10,7 +10,7 @@
 
 <div class="card">
   <h1>🌸 Շնորհավոր Մարտի 8 🌸</h1>
-  <p class="text" id="text">Այսօր է առաջին էջի տեքստը</p>
+  <p class="text" id="text"></p>
   <div>
     <span class="nav-btn" id="prev">&#8592;</span>
     <span class="nav-btn" id="next">&#8594;</span>
@@ -21,8 +21,8 @@
 <script>
 // Тексты для страниц
 const pages = [
-  "Առաջին էջի տեքստը",
-  "Սա է երկրորդ էջը",
+  "Առաջին էջի տեքստ",
+  "Երկրորդ էջի տեքստ",
   "Երրորդ էջի տեքստ",
   "Չորրորդ էջի տեքստ",
   "Հինգերորդ էջի տեքստ"
@@ -30,7 +30,9 @@ const pages = [
 
 let current = 0;
 const textEl = document.getElementById("text");
+textEl.textContent = pages[current]; // сразу отображаем первую страницу
 
+// Навигация стрелками
 document.getElementById("prev").addEventListener("click", () => {
   current = (current - 1 + pages.length) % pages.length;
   textEl.textContent = pages[current];
