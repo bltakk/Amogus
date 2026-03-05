@@ -18,7 +18,7 @@ font-family:sans-serif;
 overflow:hidden;
 }
 
-/* падающие лепестки */
+/* лепестки */
 
 .petal{
 position:fixed;
@@ -42,15 +42,12 @@ opacity:0.8;
 /* сердце */
 
 .heart{
-width:450px;
-height:400px;
+width:300px;
+height:260px;
 background:#ff2d55;
 position:relative;
 transform:rotate(-45deg);
-display:flex;
-align-items:center;
-justify-content:center;
-box-shadow:0 0 30px rgba(0,0,0,0.3);
+box-shadow:0 0 25px rgba(0,0,0,0.3);
 animation:heartbeat 2s infinite;
 }
 
@@ -66,34 +63,38 @@ animation:heartbeat 2s infinite;
 .heart:after{
 content:"";
 position:absolute;
-width:450px;
-height:400px;
+width:300px;
+height:260px;
 background:#ff2d55;
 border-radius:50%;
 }
 
 .heart:before{
-top:-225px;
+top:-150px;
 left:0;
 }
 
 .heart:after{
-left:225px;
+left:150px;
 top:0;
 }
 
-/* текст */
+/* контейнер текста */
+
+.content{
+position:absolute;
+width:240px;
+text-align:center;
+color:white;
+font-size:18px;
+font-weight:bold;
+line-height:1.4;
+}
+
+/* страницы */
 
 .page{
 display:none;
-position:absolute;
-width:300px;
-text-align:center;
-color:white;
-font-size:22px;
-font-weight:bold;
-transform:rotate(45deg);
-line-height:1.4;
 }
 
 .page.active{
@@ -106,7 +107,7 @@ display:block;
 position:absolute;
 top:50%;
 transform:translateY(-50%);
-font-size:60px;
+font-size:50px;
 color:white;
 cursor:pointer;
 user-select:none;
@@ -115,11 +116,11 @@ z-index:10;
 }
 
 .left{
-left:40px;
+left:30px;
 }
 
 .right{
-right:40px;
+right:30px;
 }
 
 .arrow:hover{
@@ -134,7 +135,9 @@ opacity:0.7;
 <div class="arrow left" onclick="prevPage()">❮</div>
 <div class="arrow right" onclick="nextPage()">❯</div>
 
-<div class="heart">
+<div class="heart"></div>
+
+<div class="content">
 
 <div class="page active">
 Թող գարունները գան ու չգնան… և որովհետև կինն է աշխարհի ամենաերկարատև գարունը։  
@@ -201,7 +204,7 @@ petal.innerHTML="🌸";
 
 petal.style.left=Math.random()*100+"vw";
 petal.style.animationDuration=(5+Math.random()*5)+"s";
-petal.style.fontSize=(16+Math.random()*14)+"px";
+petal.style.fontSize=(16+Math.random()*12)+"px";
 
 document.body.appendChild(petal);
 
@@ -211,7 +214,7 @@ petal.remove();
 
 }
 
-setInterval(createPetal,500);
+setInterval(createPetal,600);
 
 </script>
 
