@@ -5,23 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Շնորհավոր Մարտի 8</title>
 <style>
-/* Падающие цветки */
-.petal {
-  position:fixed;
-  top:-30px;
-  font-size:20px;
-  pointer-events:none;
-  z-index:1;
-  transition: transform 0.2s ease;
+body{
+  margin:0;
+  padding:0;
+  height:100vh;
+  width:100vw;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:sans-serif;
+  background: linear-gradient(135deg,#ffe6f2,#fff6fb); /* фон */
+  position:relative;
 }
 
-/* Полупрозрачный блок текста */
-.card {
+/* Карточка с текстом */
+.card{
   position:relative;
   z-index:2;
   width:90%;
   max-width:400px;
-  margin:0 auto;
   padding:25px;
   background: rgba(255,255,255,0.8);
   border-radius:20px;
@@ -46,6 +49,14 @@ button {
   cursor:pointer;
   font-size:14px;
 }
+
+/* Лепестки */
+.petal{
+  position:absolute;
+  pointer-events:none;
+  z-index:1;
+  transition: transform 0.2s ease;
+}
 </style>
 </head>
 <body>
@@ -61,7 +72,7 @@ button {
 </div>
 
 <script>
-// Тексты для страниц
+// Страницы текста
 const pages = [
   "Թող գարունները գան ու չգնան… և որովհետև կինն է աշխարհի ամենաերկարատև գարունը։ Ու թող ձեր ժպիտներն ու դրական էներգիան միշտ լինեն բոլորի հարատև ուղեկիցը",
   "Երկրորդ էջի տեքստ",
@@ -77,78 +88,74 @@ const nextBtn = document.getElementById("next");
 
 function updatePage() {
   textEl.textContent = pages[current];
-  prevBtn.style.display = (current === 0) ? 'none' : 'inline';
-  nextBtn.style.display = (current === pages.length - 1) ? 'inline' : 'inline';
+  prevBtn.style.display = (current===0)?'none':'inline';
+  nextBtn.style.display = (current===pages.length-1)?'none':'inline';
 }
-
 updatePage();
-prevBtn.addEventListener("click", () => { if(current>0){current--;updatePage();} });
-nextBtn.addEventListener("click", () => { if(current<pages.length-1){current++;updatePage();} });
+prevBtn.addEventListener("click",()=>{if(current>0){current--;updatePage();}});
+nextBtn.addEventListener("click",()=>{if(current<pages.length-1){current++;updatePage();}});
 
-// Музыка
+// Кнопка музыки
 let music;
 const btn = document.getElementById("playBtn");
-btn.addEventListener("click", () => {
+btn.addEventListener("click",()=>{
   if(!music){
-    music = new Audio("music.mp3");
-    music.loop = true;
-    music.volume = 0.2;
+    music=new Audio("music.mp3");
+    music.loop=true;
+    music.volume=0.2;
     music.play();
-    btn.textContent = "Կանգնեցնել 🎵";
+    btn.textContent="Կանգնեցնել 🎵";
   } else if(music.paused){
     music.play();
-    btn.textContent = "Կանգնեցնել 🎵";
-  } else {
+    btn.textContent="Կանգնեցնել 🎵";
+  } else{
     music.pause();
-    btn.textContent = "Միացնել 🎵";
+    btn.textContent="Միացնել 🎵";
   }
 });
 
 // Лепестки
-const flowers = ["🌸","🌷","🌼","🌺","💐"];
-const card = document.querySelector('.card');
-const floor = window.innerHeight - 30; // низ экрана
+const flowers=["🌸","🌷","🌼","🌺","💐"];
+const bodyEl=document.body;
+const card=document.querySelector(".card");
+let floor=window.innerHeight-20; // нижняя граница
 
 function createPetal(){
-  const petal = document.createElement("div");
+  const petal=document.createElement("div");
   petal.classList.add("petal");
-  petal.innerHTML = flowers[Math.floor(Math.random()*flowers.length)];
-  petal.style.left = Math.random()*100 + "vw";
-  petal.style.fontSize = (16 + Math.random()*12) + "px";
-  document.body.appendChild(petal);
+  petal.innerHTML=flowers[Math.floor(Math.random()*flowers.length)];
+  petal.style.left=Math.random()*100+"vw";
+  petal.style.fontSize=(16+Math.random()*12)+"px";
+  bodyEl.appendChild(petal);
 
-  let pos = -30;
-  const speed = 1 + Math.random()*2;
+  let pos=-30;
+  const speed=1+Math.random()*2;
 
-  const fall = setInterval(() => {
-    pos += speed;
-    petal.style.top = pos + "px";
+  const fall=setInterval(()=>{
+    pos+=speed;
 
-    // Отскок при касании карточки
-    const petalRect = petal.getBoundingClientRect();
-    const cardRect = card.getBoundingClientRect();
-    if (
-      petalRect.bottom > cardRect.top &&
-      petalRect.top < cardRect.bottom &&
-      petalRect.left < cardRect.right &&
-      petalRect.right > cardRect.left
-    ){
-      petal.style.transform = "translateY(-20px)";
-    } else {
-      petal.style.transform = "";
-    }
+    // Проверка отскока на карточку
+    const petalRect=petal.getBoundingClientRect();
+    const cardRect=card.getBoundingClientRect();
+    if(petalRect.bottom>cardRect.top &&
+       petalRect.top<cardRect.bottom &&
+       petalRect.left<cardRect.right &&
+       petalRect.right>cardRect.left){
+         petal.style.transform="translateY(-20px)";
+    } else { petal.style.transform=""; }
 
-    // Достигли низа экрана
-    if(pos >= floor){
+    // Накопление на дне
+    if(pos>=floor){
       clearInterval(fall);
-      petal.style.position = "absolute";
-      petal.style.top = floor + "px";
+      petal.style.top=floor+"px";
+      petal.style.position="absolute";
+    } else {
+      petal.style.top=pos+"px";
     }
-  }, 20);
+  },20);
 }
 
-setInterval(createPetal, 500);
+setInterval(createPetal,500);
 </script>
-
 </body>
 </html>
