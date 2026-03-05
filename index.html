@@ -5,6 +5,59 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Շնորհավոր Մարտի 8</title>
 <link rel="stylesheet" href="style.css">
+<style>
+/* Легкая анимация падающих лепестков */
+.petal {
+  position:fixed;
+  top:-10px;
+  font-size:20px;
+  animation:fall linear forwards;
+  pointer-events:none;
+  z-index:1;
+}
+
+@keyframes fall {
+  0% {
+    transform:translateY(-10px) rotate(0deg);
+    opacity:1;
+  }
+  100% {
+    transform:translateY(110vh) rotate(360deg);
+    opacity:0.8;
+  }
+}
+
+/* Навигация и карточка остаются как в твоем коде */
+.card {
+  position:relative;
+  z-index:2;
+  width:90%;
+  max-width:400px;
+  margin:0 auto;
+  padding:25px;
+  background:white;
+  border-radius:20px;
+  text-align:center;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.nav-btn {
+  cursor:pointer;
+  font-size:24px;
+  font-weight:bold;
+  margin:0 10px;
+  user-select:none;
+}
+
+button {
+  margin-top:15px;
+  padding:8px 15px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  font-size:14px;
+}
+</style>
 </head>
 <body>
 
@@ -36,8 +89,6 @@ const nextBtn = document.getElementById("next");
 // Функция обновления текста и стрелок
 function updatePage() {
   textEl.textContent = pages[current];
-
-  // Скрываем стрелки на границах
   prevBtn.style.display = (current === 0) ? 'none' : 'inline';
   nextBtn.style.display = (current === pages.length - 1) ? 'none' : 'inline';
 }
@@ -60,7 +111,7 @@ nextBtn.addEventListener("click", () => {
   }
 });
 
-// Кнопка музыки для iOS и Android
+// Кнопка музыки
 let music;
 const btn = document.getElementById("playBtn");
 
@@ -79,6 +130,20 @@ btn.addEventListener("click", () => {
     btn.textContent = "Միացնել 🎵";
   }
 });
+
+// Лепестки
+function createPetal(){
+  const petal = document.createElement("div");
+  petal.classList.add("petal");
+  petal.innerHTML = "🌸";
+  petal.style.left = Math.random()*100 + "vw";
+  petal.style.animationDuration = (5 + Math.random()*5) + "s";
+  petal.style.fontSize = (16 + Math.random()*12) + "px";
+  document.body.appendChild(petal);
+  setTimeout(() => { petal.remove(); }, 11000);
+}
+
+setInterval(createPetal, 600);
 </script>
 
 </body>
