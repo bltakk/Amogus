@@ -40,7 +40,8 @@ h1 {
   font-size:1em;
   line-height:1.6em;
   color:#444;
-  min-height:80px; /* чтобы карточка не прыгала при смене текста */
+  min-height:80px;
+  margin-bottom:10px;
 }
 
 button {
@@ -52,7 +53,6 @@ button {
   color:white;
   cursor:pointer;
   box-shadow:0 0 10px rgba(214,51,132,0.4);
-  margin-top:10px;
 }
 
 button:hover { background:#e7549f; }
@@ -65,6 +65,7 @@ button:hover { background:#e7549f; }
   user-select:none;
 }
 .nav-btn:hover { color:#e7549f; }
+
 </style>
 </head>
 <body>
@@ -79,9 +80,10 @@ button:hover { background:#e7549f; }
   <button id="playBtn">Միացնել երաժշտությունը 💐</button>
 </div>
 
-<audio id="music" loop>
+<!-- Музыка через video для iOS -->
+<video id="music" loop style="display:none;">
   <source src="music.mp3" type="audio/mpeg">
-</audio>
+</video>
 
 <script>
 // Тексты для страниц (заглушки)
@@ -112,8 +114,10 @@ const btn = document.getElementById("playBtn");
 
 btn.addEventListener("click", () => {
   if (music.paused) {
-    music.play();
-    btn.textContent = "Կանգնեցնել երաժշտությունը 💐";
+    music.play().catch(() => {
+      alert("Խնդրում ենք սեղմել կրկին, որպեսզի երաժշտությունը սկսվի iOS-ում");
+    });
+    btn.textContent = "Կանգնեցնել երաժշտություն 💐";
   } else {
     music.pause();
     btn.textContent = "Միացնել երաժշտությունը 💐";
