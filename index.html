@@ -6,7 +6,7 @@
 <title>Շնորհավոր Մարտի 8</title>
 <link rel="stylesheet" href="style.css">
 <style>
-/* Лепестки */
+/* Падающие цветки */
 .petal {
   position:fixed;
   top:-10px;
@@ -27,7 +27,7 @@
   }
 }
 
-/* Белый полупрозрачный блок текста */
+/* Полупрозрачный блок текста */
 .card {
   position:relative;
   z-index:2;
@@ -35,7 +35,7 @@
   max-width:400px;
   margin:0 auto;
   padding:25px;
-  background: rgba(255,255,255,0.8); /* полупрозрачный белый фон */
+  background: rgba(255,255,255,0.8);
   border-radius:20px;
   text-align:center;
   box-shadow:0 10px 25px rgba(0,0,0,0.2);
@@ -87,35 +87,26 @@ const textEl = document.getElementById("text");
 const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
 
-// Функция обновления текста и стрелок
+// Обновление текста и стрелок
 function updatePage() {
   textEl.textContent = pages[current];
   prevBtn.style.display = (current === 0) ? 'none' : 'inline';
   nextBtn.style.display = (current === pages.length - 1) ? 'inline' : 'inline';
 }
 
-// Инициализация первой страницы
 updatePage();
 
-// Навигация стрелками
+// Навигация
 prevBtn.addEventListener("click", () => {
-  if (current > 0) {
-    current--;
-    updatePage();
-  }
+  if (current > 0) { current--; updatePage(); }
 });
-
 nextBtn.addEventListener("click", () => {
-  if (current < pages.length - 1) {
-    current++;
-    updatePage();
-  }
+  if (current < pages.length - 1) { current++; updatePage(); }
 });
 
 // Кнопка музыки
 let music;
 const btn = document.getElementById("playBtn");
-
 btn.addEventListener("click", () => {
   if (!music) {
     music = new Audio("music.mp3");
@@ -132,20 +123,22 @@ btn.addEventListener("click", () => {
   }
 });
 
-// Лепестки
+// Лепестки и цветки
+const flowers = ["🌸","🌷","🌼","🌺","💐"];
+
 function createPetal(){
   const petal = document.createElement("div");
   petal.classList.add("petal");
-  petal.innerHTML = "🌸";
+  // Случайный цветок
+  petal.innerHTML = flowers[Math.floor(Math.random()*flowers.length)];
   petal.style.left = Math.random()*100 + "vw";
   petal.style.animationDuration = (5 + Math.random()*5) + "s";
   petal.style.fontSize = (16 + Math.random()*12) + "px";
   document.body.appendChild(petal);
-  setTimeout(() => { petal.remove(); }, 11000);
+  setTimeout(()=>{ petal.remove(); },11000);
 }
 
 setInterval(createPetal, 600);
-
 </script>
 
 </body>
