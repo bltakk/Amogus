@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Շնորհավոր Մարտի 8</title>
+<style>
+body {
+  margin: 0;
+  font-family: Georgia, serif;
+  text-align: center;
+  height: 100vh;
+  overflow: hidden;
+  background: #ffe6f2; /* светлый розовый фон */
+  background-image: url('https://png.pngtree.com/png-vector/20230110/ourmid/pngtree-pink-flower-petal-decoration-png-image_6551619.png');
+  background-repeat: repeat;
+  background-size: 60px;
+}
+
+/* Карточка с поздравлением */
+.card {
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  background: rgba(255,255,255,0.9);
+  padding: 30px 20px;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 25px;
+  box-shadow: 0 0 25px rgba(255,182,193,0.4);
+}
+
+h1 {
+  color:#d63384;
+  font-size:1.5em;
+  margin-bottom:15px;
+}
+
+.text {
+  font-size:1em;
+  line-height:1.6em;
+  color:#444;
+  margin-bottom: 20px;
+}
+
+/* Кнопка воспроизведения */
+button {
+  padding: 10px 20px;
+  font-size: 1em;
+  border: none;
+  border-radius: 20px;
+  background: #d63384;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(214,51,132,0.4);
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #e7549f;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h1>🌸 Սիրելի կանայք և աղջիկներ 🌸</h1>
+  <p class="text">
+    Թող այս գեղեցիկ գարնանային օրը<br>
+    ձեզ պարգևի ջերմություն ու ժպիտներ։<br>
+    Դուք մեր համալսարանի գեղեցկությունն եք,<br>
+    ներշնչանքն ու պայծառ լույսը։<br>
+    Թող ձեր օրերը միշտ ծաղկեն<br>
+    երջանկությամբ և սիրով։
+  </p>
+  <button id="playBtn">▶ Վերցնել երաժշտությունը</button>
+</div>
+
+<!-- Музыка -->
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const music = document.getElementById("music");
+const btn = document.getElementById("playBtn");
+
+btn.addEventListener("click", () => {
+  if (music.paused) {
+    music.play();
+    btn.textContent = "⏸ Կանգնեցնել երաժշտությունը";
+  } else {
+    music.pause();
+    btn.textContent = "▶ Վերցնել երաժշտությունը";
+  }
+});
+</script>
+
+</body>
+</html>
