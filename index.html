@@ -4,27 +4,36 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Շնորհավոր Մարտի 8</title>
+<link rel="stylesheet" href="style.css">
 <style>
-body{
-  margin:0;
-  padding:0;
-  height:100vh;
-  width:100vw;
-  overflow:hidden;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-family:sans-serif;
-  background: linear-gradient(135deg,#ffe6f2,#fff6fb); /* фон */
-  position:relative;
+/* Падающие цветки */
+.petal {
+  position:fixed;
+  top:-10px;
+  font-size:20px;
+  animation:fall linear forwards;
+  pointer-events:none;
+  z-index:1;
 }
 
-/* Карточка с текстом */
-.card{
+@keyframes fall {
+  0% {
+    transform:translateY(-10px) rotate(0deg);
+    opacity:1;
+  }
+  100% {
+    transform:translateY(110vh) rotate(360deg);
+    opacity:0.8;
+  }
+}
+
+/* Полупрозрачный блок текста */
+.card {
   position:relative;
   z-index:2;
   width:90%;
   max-width:400px;
+  margin:0 auto;
   padding:25px;
   background: rgba(255,255,255,0.8);
   border-radius:20px;
@@ -49,14 +58,6 @@ button {
   cursor:pointer;
   font-size:14px;
 }
-
-/* Лепестки */
-.petal{
-  position:absolute;
-  pointer-events:none;
-  z-index:1;
-  transition: transform 0.2s ease;
-}
 </style>
 </head>
 <body>
@@ -72,7 +73,7 @@ button {
 </div>
 
 <script>
-// Страницы текста
+// Тексты для страниц
 const pages = [
   "Թող գարունները գան ու չգնան… և որովհետև կինն է աշխարհի ամենաերկարատև գարունը։ Ու թող ձեր ժպիտներն ու դրական էներգիան միշտ լինեն բոլորի հարատև ուղեկիցը",
   "Երկրորդ էջի տեքստ",
@@ -86,76 +87,59 @@ const textEl = document.getElementById("text");
 const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
 
+// Обновление текста и стрелок
 function updatePage() {
   textEl.textContent = pages[current];
-  prevBtn.style.display = (current===0)?'none':'inline';
-  nextBtn.style.display = (current===pages.length-1)?'none':'inline';
+  prevBtn.style.display = (current === 0) ? 'none' : 'inline';
+  nextBtn.style.display = (current === pages.length - 1) ? 'inline' : 'inline';
 }
+
 updatePage();
-prevBtn.addEventListener("click",()=>{if(current>0){current--;updatePage();}});
-nextBtn.addEventListener("click",()=>{if(current<pages.length-1){current++;updatePage();}});
+
+// Навигация
+prevBtn.addEventListener("click", () => {
+  if (current > 0) { current--; updatePage(); }
+});
+nextBtn.addEventListener("click", () => {
+  if (current < pages.length - 1) { current++; updatePage(); }
+});
 
 // Кнопка музыки
 let music;
 const btn = document.getElementById("playBtn");
-btn.addEventListener("click",()=>{
-  if(!music){
-    music=new Audio("music.mp3");
-    music.loop=true;
-    music.volume=0.2;
+btn.addEventListener("click", () => {
+  if (!music) {
+    music = new Audio("music.mp3");
+    music.loop = true;
+    music.volume = 0.2;
     music.play();
-    btn.textContent="Կանգնեցնել 🎵";
-  } else if(music.paused){
+    btn.textContent = "Կանգնեցնել 🎵";
+  } else if (music.paused) {
     music.play();
-    btn.textContent="Կանգնեցնել 🎵";
-  } else{
+    btn.textContent = "Կանգնեցնել 🎵";
+  } else {
     music.pause();
-    btn.textContent="Միացնել 🎵";
+    btn.textContent = "Միացնել 🎵";
   }
 });
 
-// Лепестки
-const flowers=["🌸","🌷","🌼","🌺","💐"];
-const bodyEl=document.body;
-const card=document.querySelector(".card");
-let floor=window.innerHeight-20; // нижняя граница
+// Лепестки и цветки
+const flowers = ["🌸","🌷","🌼","🌺","💐"];
 
 function createPetal(){
-  const petal=document.createElement("div");
+  const petal = document.createElement("div");
   petal.classList.add("petal");
-  petal.innerHTML=flowers[Math.floor(Math.random()*flowers.length)];
-  petal.style.left=Math.random()*100+"vw";
-  petal.style.fontSize=(16+Math.random()*12)+"px";
-  bodyEl.appendChild(petal);
-
-  let pos=-30;
-  const speed=1+Math.random()*2;
-
-  const fall=setInterval(()=>{
-    pos+=speed;
-
-    // Проверка отскока на карточку
-    const petalRect=petal.getBoundingClientRect();
-    const cardRect=card.getBoundingClientRect();
-    if(petalRect.bottom>cardRect.top &&
-       petalRect.top<cardRect.bottom &&
-       petalRect.left<cardRect.right &&
-       petalRect.right>cardRect.left){
-         petal.style.transform="translateY(-20px)";
-    } else { petal.style.transform=""; }
-
-    // Накопление на дне
-    if(pos>=floor){
-      clearInterval(fall);
-      petal.style.top=floor+"px";
-      petal.style.position="absolute";
-    } else {
-      petal.style.top=pos+"px";
-    }
-  },20);
+  // Случайный цветок
+  petal.innerHTML = flowers[Math.floor(Math.random()*flowers.length)];
+  petal.style.left = Math.random()*100 + "vw";
+  petal.style.animationDuration = (5 + Math.random()*5) + "s";
+  petal.style.fontSize = (16 + Math.random()*12) + "px";
+  document.body.appendChild(petal);
+  setTimeout(()=>{ petal.remove(); },11000);
 }
 
-setInterval(createPetal,500);
+setInterval(createPetal, 600);
 </script>
+
 </body>
 </html>
