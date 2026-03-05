@@ -30,17 +30,34 @@ const pages = [
 
 let current = 0;
 const textEl = document.getElementById("text");
-textEl.textContent = pages[current]; // сразу первая страница
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+
+// Функция обновления текста и стрелок
+function updatePage() {
+  textEl.textContent = pages[current];
+
+  // Скрываем стрелки на границах
+  prevBtn.style.display = (current === 0) ? 'none' : 'inline';
+  nextBtn.style.display = (current === pages.length - 1) ? 'none' : 'inline';
+}
+
+// Инициализация первой страницы
+updatePage();
 
 // Навигация стрелками
-document.getElementById("prev").addEventListener("click", () => {
-  current = (current - 1 + pages.length) % pages.length;
-  textEl.textContent = pages[current];
+prevBtn.addEventListener("click", () => {
+  if (current > 0) {
+    current--;
+    updatePage();
+  }
 });
 
-document.getElementById("next").addEventListener("click", () => {
-  current = (current + 1) % pages.length;
-  textEl.textContent = pages[current];
+nextBtn.addEventListener("click", () => {
+  if (current < pages.length - 1) {
+    current++;
+    updatePage();
+  }
 });
 
 // Кнопка музыки для iOS и Android
