@@ -4,27 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Շնորհավոր Մարտի 8</title>
-<link rel="stylesheet" href="style.css">
 <style>
 /* Падающие цветки */
 .petal {
   position:fixed;
-  top:-10px;
+  top:-30px;
   font-size:20px;
-  animation:fall linear forwards;
   pointer-events:none;
   z-index:1;
-}
-
-@keyframes fall {
-  0% {
-    transform:translateY(-10px) rotate(0deg);
-    opacity:1;
-  }
-  100% {
-    transform:translateY(110vh) rotate(360deg);
-    opacity:0.8;
-  }
+  transition: transform 0.2s ease;
 }
 
 /* Полупрозрачный блок текста */
@@ -87,7 +75,6 @@ const textEl = document.getElementById("text");
 const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
 
-// Обновление текста и стрелок
 function updatePage() {
   textEl.textContent = pages[current];
   prevBtn.style.display = (current === 0) ? 'none' : 'inline';
@@ -95,26 +82,20 @@ function updatePage() {
 }
 
 updatePage();
+prevBtn.addEventListener("click", () => { if(current>0){current--;updatePage();} });
+nextBtn.addEventListener("click", () => { if(current<pages.length-1){current++;updatePage();} });
 
-// Навигация
-prevBtn.addEventListener("click", () => {
-  if (current > 0) { current--; updatePage(); }
-});
-nextBtn.addEventListener("click", () => {
-  if (current < pages.length - 1) { current++; updatePage(); }
-});
-
-// Кнопка музыки
+// Музыка
 let music;
 const btn = document.getElementById("playBtn");
 btn.addEventListener("click", () => {
-  if (!music) {
+  if(!music){
     music = new Audio("music.mp3");
     music.loop = true;
     music.volume = 0.2;
     music.play();
     btn.textContent = "Կանգնեցնել 🎵";
-  } else if (music.paused) {
+  } else if(music.paused){
     music.play();
     btn.textContent = "Կանգնեցնել 🎵";
   } else {
@@ -123,22 +104,50 @@ btn.addEventListener("click", () => {
   }
 });
 
-// Лепестки и цветки
+// Лепестки
 const flowers = ["🌸","🌷","🌼","🌺","💐"];
+const card = document.querySelector('.card');
+const floor = window.innerHeight - 30; // низ экрана
 
 function createPetal(){
   const petal = document.createElement("div");
   petal.classList.add("petal");
-  // Случайный цветок
   petal.innerHTML = flowers[Math.floor(Math.random()*flowers.length)];
   petal.style.left = Math.random()*100 + "vw";
-  petal.style.animationDuration = (5 + Math.random()*5) + "s";
   petal.style.fontSize = (16 + Math.random()*12) + "px";
   document.body.appendChild(petal);
-  setTimeout(()=>{ petal.remove(); },11000);
+
+  let pos = -30;
+  const speed = 1 + Math.random()*2;
+
+  const fall = setInterval(() => {
+    pos += speed;
+    petal.style.top = pos + "px";
+
+    // Отскок при касании карточки
+    const petalRect = petal.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
+    if (
+      petalRect.bottom > cardRect.top &&
+      petalRect.top < cardRect.bottom &&
+      petalRect.left < cardRect.right &&
+      petalRect.right > cardRect.left
+    ){
+      petal.style.transform = "translateY(-20px)";
+    } else {
+      petal.style.transform = "";
+    }
+
+    // Достигли низа экрана
+    if(pos >= floor){
+      clearInterval(fall);
+      petal.style.position = "absolute";
+      petal.style.top = floor + "px";
+    }
+  }, 20);
 }
 
-setInterval(createPetal, 600);
+setInterval(createPetal, 500);
 </script>
 
 </body>
