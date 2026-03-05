@@ -15,7 +15,7 @@ body {
   justify-content:center;
   align-items:center;
   font-family:sans-serif;
-  background: linear-gradient(135deg,#ffe6f2,#fff6fb);
+  background: linear-gradient(135deg,#ffe6f2,#fff6fb); /* фон */
   position:relative;
 }
 
@@ -48,7 +48,6 @@ button {
   border-radius:12px;
   cursor:pointer;
   font-size:14px;
-  z-index:3;
 }
 
 /* Падающие цветки */
@@ -124,7 +123,8 @@ btn.addEventListener("click", ()=>{
 });
 
 // Лепестки
-const flowers = ["🌸","🌷","💗","🌺","❤️"];
+const flowers = ["🌸","🌷","🌼","🌺","💐"];
+
 function createPetal(){
   const petal = document.createElement("div");
   petal.classList.add("petal");
@@ -135,6 +135,7 @@ function createPetal(){
   document.body.appendChild(petal);
   setTimeout(()=>{ petal.remove(); },11000);
 }
+
 setInterval(createPetal, 600);
 </script>
 
