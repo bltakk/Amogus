@@ -5,80 +5,146 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Շնորհավոր Մարտի 8</title>
 <link rel="stylesheet" href="style.css">
+
+<style>
+
+.card{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:320px;
+height:280px;
+background:#ff4d6d;
+color:white;
+padding:40px 30px;
+text-align:center;
+
+clip-path: polygon(
+50% 90%,
+90% 55%,
+90% 30%,
+75% 15%,
+60% 15%,
+50% 25%,
+40% 15%,
+25% 15%,
+10% 30%,
+10% 55%
+);
+}
+
+.text{
+font-size:14px;
+line-height:1.4;
+}
+
+.nav-btn{
+cursor:pointer;
+font-size:34px;
+font-weight:bold;
+margin:12px;
+color:white;
+text-shadow:0 0 6px rgba(0,0,0,0.4);
+user-select:none;
+}
+
+button{
+margin-top:10px;
+padding:8px 14px;
+border:none;
+border-radius:15px;
+cursor:pointer;
+}
+
+</style>
+
 </head>
 <body>
 
 <div class="card">
-  <h1>🌸 Շնորհավոր Մարտի 8 🌸</h1>
-  <p class="text" id="text"></p>
-  <div>
-    <span class="nav-btn" id="prev">&#8592;</span>
-    <span class="nav-btn" id="next">&#8594;</span>
-  </div>
-  <button id="playBtn">Միացնել 🎵</button>
+
+<p class="text" id="text"></p>
+
+<div>
+<span class="nav-btn" id="prev">←</span>
+<span class="nav-btn" id="next">→</span>
+</div>
+
+<button id="playBtn">Միացնել 🎵</button>
+
 </div>
 
 <script>
-// Тексты для страниц
+
 const pages = [
-  "Թող գարունները գան ու չգնան… և որովհետև կինն է աշխարհի ամենաերկարատև գարունը։ Ու թող ձեր ժպիտներն ու դրական էներգիան միշտ լինեն բոլորի հարատև ուղեկիցը",
-  "Երկրորդ էջի տեքստ",
-  "Երրորդ էջի տեքստ",
-  "Չորրորդ էջի տեքստ",
-  "Հինգերորդ էջի տեքստ"
+"Թող գարունները գան ու չգնան… և որովհետև կինն է աշխարհի ամենաերկարատև գարունը։ Ու թող ձեր ժպիտներն ու դրական էներգիան միշտ լինեն բոլորի հարատև ուղեկիցը",
+"Երկրորդ էջի տեքստ",
+"Երրորդ էջի տեքստ",
+"Չորրորդ էջի տեքստ",
+"Հինգերորդ էջի տեքստ"
 ];
 
 let current = 0;
+
 const textEl = document.getElementById("text");
 const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
 
-// Функция обновления текста и стрелок
-function updatePage() {
-  textEl.textContent = pages[current];
+function updatePage(){
 
-  // Скрываем стрелки на границах
-  prevBtn.style.display = (current === 0) ? 'none' : 'inline';
-  nextBtn.style.display = (current === pages.length - 1) ? 'none' : 'inline';
+textEl.textContent = pages[current];
+
+prevBtn.style.display = current === 0 ? "none" : "inline";
+nextBtn.style.display = current === pages.length - 1 ? "none" : "inline";
+
 }
 
-// Инициализация первой страницы
 updatePage();
 
-// Навигация стрелками
 prevBtn.addEventListener("click", () => {
-  if (current > 0) {
-    current--;
-    updatePage();
-  }
+
+if(current > 0){
+current--;
+updatePage();
+}
+
 });
 
 nextBtn.addEventListener("click", () => {
-  if (current < pages.length - 1) {
-    current++;
-    updatePage();
-  }
+
+if(current < pages.length - 1){
+current++;
+updatePage();
+}
+
 });
 
-// Кнопка музыки для iOS и Android
 let music;
 const btn = document.getElementById("playBtn");
 
 btn.addEventListener("click", () => {
-  if (!music) {
-    music = new Audio("music.mp3");
-    music.loop = true;
-    music.volume = 0.2;
-    music.play();
-    btn.textContent = "Կանգնեցնել 🎵";
-  } else if (music.paused) {
-    music.play();
-    btn.textContent = "Կանգնեցնել 🎵";
-  } else {
-    music.pause();
-    btn.textContent = "Միացնել 🎵";
-  }
+
+if(!music){
+music = new Audio("music.mp3");
+music.loop = true;
+music.volume = 0.2;
+music.play();
+btn.textContent = "Կանգնեցնել 🎵";
+}
+
+else if(music.paused){
+music.play();
+btn.textContent = "Կանգնեցնել 🎵";
+}
+
+else{
+music.pause();
+btn.textContent = "Միացնել 🎵";
+}
+
 });
+
 </script>
 
 </body>
