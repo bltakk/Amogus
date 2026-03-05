@@ -4,69 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Շնորհավոր Մարտի 8</title>
-<style>
-body {
-  margin:0;
-  font-family: Georgia, serif;
-  text-align:center;
-  height:100vh;
-  overflow:hidden;
-  background: #ffe6f2;
-  background-image: url('https://png.pngtree.com/png-vector/20230110/ourmid/pngtree-pink-flower-petal-decoration-png-image_6551619.png');
-  background-repeat: repeat;
-  background-size: 60px;
-}
-
-.card {
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  background: rgba(255,255,255,0.95);
-  padding:30px 20px;
-  width:90%;
-  max-width:400px;
-  border-radius:25px;
-  box-shadow:0 0 25px rgba(255,182,193,0.4);
-}
-
-h1 {
-  color:#d63384;
-  font-size:1.5em;
-  margin-bottom:15px;
-}
-
-.text {
-  font-size:1em;
-  line-height:1.6em;
-  color:#444;
-  min-height:80px;
-  margin-bottom:10px;
-}
-
-button {
-  padding: 10px 20px;
-  font-size:1em;
-  border:none;
-  border-radius:20px;
-  background:#d63384;
-  color:white;
-  cursor:pointer;
-  box-shadow:0 0 10px rgba(214,51,132,0.4);
-}
-
-button:hover { background:#e7549f; }
-
-.nav-btn {
-  cursor:pointer;
-  font-size:1.5em;
-  padding:0 10px;
-  color:#d63384;
-  user-select:none;
-}
-.nav-btn:hover { color:#e7549f; }
-
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -77,16 +15,11 @@ button:hover { background:#e7549f; }
     <span class="nav-btn" id="prev">&#8592;</span>
     <span class="nav-btn" id="next">&#8594;</span>
   </div>
-  <button id="playBtn">Միացնել երաժշտությունը 💐</button>
+  <button id="playBtn">Միացնել 🎵</button>
 </div>
 
-<!-- Музыка через video для iOS -->
-<video id="music" loop style="display:none;">
-  <source src="music.mp3" type="audio/mpeg">
-</video>
-
 <script>
-// Тексты для страниц (заглушки)
+// Тексты для страниц
 const pages = [
   "Այսօր է առաջին էջի տեքստը",
   "Սա է երկրորդ էջը",
@@ -108,19 +41,25 @@ document.getElementById("next").addEventListener("click", () => {
   textEl.textContent = pages[current];
 });
 
-// Кнопка музыки
-const music = document.getElementById("music");
+// Кнопка музыки для iOS и Android
+let music;
 const btn = document.getElementById("playBtn");
 
 btn.addEventListener("click", () => {
-  if (music.paused) {
-    music.play().catch(() => {
+  if (!music) {
+    music = new Audio("music.mp3");
+    music.loop = true;
+    music.volume = 0.2;
+    music.play().catch(()=>{
       alert("Խնդրում ենք սեղմել կրկին, որպեսզի երաժշտությունը սկսվի iOS-ում");
     });
-    btn.textContent = "Կանգնեցնել երաժշտություն 💐";
+    btn.textContent = "Կանգնեցնել 🎵";
+  } else if (music.paused) {
+    music.play();
+    btn.textContent = "Կանգնեցնել 🎵";
   } else {
     music.pause();
-    btn.textContent = "Միացնել երաժշտությունը 💐";
+    btn.textContent = "Միացնել 🎵";
   }
 });
 </script>
