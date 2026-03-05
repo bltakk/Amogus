@@ -6,9 +6,9 @@ body {
   height: 100vh;
   overflow: hidden;
 
-  /* Фон с весенними цветами */
-  background: url('background.jpg') center center / cover no-repeat;
-  background-color: #ffe6f2; /* резервный цвет на случай медленной загрузки */
+  /* локальный фон PNG с цветами */
+  background: url('background.png') center center / cover no-repeat;
+  background-color: #ffe6f2; /* резервный цвет на случай, если фон не загрузится */
 }
 
 /* Карточка с поздравлением */
