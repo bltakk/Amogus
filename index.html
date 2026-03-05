@@ -50,9 +50,7 @@ btn.addEventListener("click", () => {
     music = new Audio("music.mp3");
     music.loop = true;
     music.volume = 0.2;
-    music.play().catch(()=>{
-      alert("Խնդրում ենք սեղմել կրկին, որպեսզի երաժշտությունը սկսվի iOS-ում");
-    });
+    music.play();
     btn.textContent = "Կանգնեցնել 🎵";
   } else if (music.paused) {
     music.play();
