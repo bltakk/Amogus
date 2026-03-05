@@ -6,7 +6,7 @@
 <title>Շնորհավոր Մարտի 8</title>
 <link rel="stylesheet" href="style.css">
 <style>
-/* Легкая анимация падающих лепестков */
+/* Лепестки */
 .petal {
   position:fixed;
   top:-10px;
@@ -27,7 +27,7 @@
   }
 }
 
-/* Навигация и карточка остаются как в твоем коде */
+/* Белый полупрозрачный блок текста */
 .card {
   position:relative;
   z-index:2;
@@ -35,12 +35,13 @@
   max-width:400px;
   margin:0 auto;
   padding:25px;
-  background:white;
+  background: rgba(255,255,255,0.8); /* полупрозрачный белый фон */
   border-radius:20px;
   text-align:center;
   box-shadow:0 10px 25px rgba(0,0,0,0.2);
 }
 
+/* Стрелки */
 .nav-btn {
   cursor:pointer;
   font-size:24px;
@@ -90,7 +91,7 @@ const nextBtn = document.getElementById("next");
 function updatePage() {
   textEl.textContent = pages[current];
   prevBtn.style.display = (current === 0) ? 'none' : 'inline';
-  nextBtn.style.display = (current === pages.length - 1) ? 'none' : 'inline';
+  nextBtn.style.display = (current === pages.length - 1) ? 'inline' : 'inline';
 }
 
 // Инициализация первой страницы
@@ -144,6 +145,7 @@ function createPetal(){
 }
 
 setInterval(createPetal, 600);
+
 </script>
 
 </body>
