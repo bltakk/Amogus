@@ -4,41 +4,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Շնորհավոր Մարտի 8</title>
-<link rel="stylesheet" href="style.css">
 <style>
-/* Падающие цветки */
-.petal {
-  position:fixed;
-  top:-10px;
-  font-size:20px;
-  animation:fall linear forwards;
-  pointer-events:none;
-  z-index:1;
+body {
+  margin:0;
+  padding:0;
+  height:100vh;
+  width:100vw;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  font-family:sans-serif;
+  background: linear-gradient(135deg,#ffe6f2,#fff6fb);
+  position:relative;
 }
 
-@keyframes fall {
-  0% {
-    transform:translateY(-10px) rotate(0deg);
-    opacity:1;
-  }
-  100% {
-    transform:translateY(110vh) rotate(360deg);
-    opacity:0.8;
-  }
-}
-
-/* Полупрозрачный блок текста */
-.card {
+/* Текст */
+.text-container {
   position:relative;
   z-index:2;
-  width:90%;
-  max-width:400px;
-  margin:0 auto;
-  padding:25px;
-  background: rgba(255,255,255,0.8);
-  border-radius:20px;
+  max-width:90%;
   text-align:center;
-  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+  padding:20px;
+  color:#333;
 }
 
 /* Стрелки */
@@ -57,13 +46,28 @@ button {
   border-radius:12px;
   cursor:pointer;
   font-size:14px;
+  z-index:3;
+}
+
+/* Падающие цветки */
+.petal {
+  position:fixed;
+  top:-10px;
+  font-size:20px;
+  animation:fall linear forwards;
+  pointer-events:none;
+  z-index:1;
+}
+
+@keyframes fall {
+  0% { transform:translateY(-10px) rotate(0deg); opacity:1; }
+  100% { transform:translateY(110vh) rotate(360deg); opacity:0.8; }
 }
 </style>
 </head>
 <body>
 
-<div class="card">
-  <h1>🌸 Շնորհավոր Մարտի 8 🌸</h1>
+<div class="text-container">
   <p class="text" id="text"></p>
   <div>
     <span class="nav-btn" id="prev">&#8592;</span>
@@ -87,34 +91,28 @@ const textEl = document.getElementById("text");
 const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
 
-// Обновление текста и стрелок
 function updatePage() {
   textEl.textContent = pages[current];
-  prevBtn.style.display = (current === 0) ? 'none' : 'inline';
-  nextBtn.style.display = (current === pages.length - 1) ? 'inline' : 'inline';
+  prevBtn.style.display = (current===0)?'none':'inline';
+  nextBtn.style.display = (current===pages.length-1)?'none':'inline';
 }
 
 updatePage();
 
-// Навигация
-prevBtn.addEventListener("click", () => {
-  if (current > 0) { current--; updatePage(); }
-});
-nextBtn.addEventListener("click", () => {
-  if (current < pages.length - 1) { current++; updatePage(); }
-});
+prevBtn.addEventListener("click", ()=>{ if(current>0){ current--; updatePage(); } });
+nextBtn.addEventListener("click", ()=>{ if(current<pages.length-1){ current++; updatePage(); } });
 
 // Кнопка музыки
 let music;
 const btn = document.getElementById("playBtn");
-btn.addEventListener("click", () => {
-  if (!music) {
+btn.addEventListener("click", ()=>{
+  if(!music){
     music = new Audio("music.mp3");
     music.loop = true;
     music.volume = 0.2;
     music.play();
     btn.textContent = "Կանգնեցնել 🎵";
-  } else if (music.paused) {
+  } else if(music.paused){
     music.play();
     btn.textContent = "Կանգնեցնել 🎵";
   } else {
@@ -123,15 +121,15 @@ btn.addEventListener("click", () => {
   }
 });
 
-// Лепестки и цветки
-const flowers = ["🌸","🌷","💗","🌺","❤️"]; // <- изменено
+// Лепестки
+const flowers = ["🌸","🌷","💗","🌺","❤️"];
 function createPetal(){
   const petal = document.createElement("div");
   petal.classList.add("petal");
   petal.innerHTML = flowers[Math.floor(Math.random()*flowers.length)];
   petal.style.left = Math.random()*100 + "vw";
-  petal.style.animationDuration = (5 + Math.random()*5) + "s";
-  petal.style.fontSize = (16 + Math.random()*12) + "px";
+  petal.style.animationDuration = "7s";
+  petal.style.fontSize = "20px";
   document.body.appendChild(petal);
   setTimeout(()=>{ petal.remove(); },11000);
 }
