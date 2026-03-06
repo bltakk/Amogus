@@ -11,7 +11,6 @@ const nextBtn = document.getElementById("next");
 const title = document.querySelector("h1");
 
 function updatePage(){
-  // innerHTML вместо textContent чтобы сердечко пульсировало
   textEl.innerHTML = pages[current];
 
   prevBtn.style.display = (current===0) ? "none" : "inline";
@@ -22,7 +21,7 @@ function updatePage(){
     textEl.style.marginTop = "0px";
   } else {
     title.style.display = "none";
-    textEl.style.marginTop = "40px"; // по центру
+    textEl.style.marginTop = "40px";
   }
 }
 
@@ -64,8 +63,10 @@ function createPetal(){
   const symbol = flowers[Math.floor(Math.random()*flowers.length)];
   petal.innerHTML = symbol;
 
-  // если сердечко — добавляем пульсацию
-  if(symbol==="❤️" || symbol==="💗"){ petal.classList.add("heart-petal"); }
+  // Если это сердечко, добавляем пульсацию
+  if(symbol==="❤️" || symbol==="💗"){ 
+    petal.classList.add("heart-petal"); 
+  }
 
   const left=Math.random()*window.innerWidth;
   petal.style.left=left+"px";
