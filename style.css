@@ -1,62 +1,63 @@
-/* style.css */
-body {
-  margin: 0;
-  font-family: Georgia, serif;
-  text-align: center;
-  height: 100vh;
-  overflow: hidden;
+body{
+margin:0;
+font-family:Georgia, serif;
+text-align:center;
+height:100vh;
+overflow:hidden;
 
-  /* локальный фон PNG с цветами */
-  background: url('background.png') center center / cover no-repeat;
-  background-color: #ffe6f2; /* резервный цвет на случай, если фон не загрузится */
+background:url('background.png') center/cover no-repeat;
+background-color:#ffe6f2;
 }
 
-/* Карточка с поздравлением */
-.card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(255, 255, 255, 0.85);
-  padding: 30px 20px;
-  width: 90%;
-  max-width: 400px;
-  border-radius: 25px;
-  box-shadow: 0 0 25px rgba(255, 182, 193, 0.4);
+.card{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:rgba(255,255,255,0.8);
+padding:25px;
+width:90%;
+max-width:400px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
 }
 
-h1 {
-  color: #d63384;
-  font-size: 1.5em;
-  margin-bottom: 15px;
+.nav-btn{
+cursor:pointer;
+font-size:24px;
+font-weight:bold;
+margin:0 10px;
+user-select:none;
 }
 
-.text {
-  font-size: 1em;
-  line-height: 1.6em;
-  color: #444;
-  min-height: 80px;
-  margin-bottom: 10px;
+button{
+margin-top:15px;
+padding:8px 15px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+font-size:14px;
 }
 
-button {
-  padding: 10px 20px;
-  font-size: 1em;
-  border: none;
-  border-radius: 20px;
-  background: #d63384;
-  color: white;
-  cursor: pointer;
-  box-shadow: 0 0 10px rgba(214, 51, 132, 0.4);
-  margin-top: 10px;
-}
-button:hover { background: #e7549f; }
+/* Падающие цветы */
 
-.nav-btn {
-  cursor: pointer;
-  font-size: 1.5em;
-  padding: 0 10px;
-  color: #d63384;
-  user-select: none;
+.petal{
+position:fixed;
+top:-10px;
+font-size:20px;
+animation:fall linear forwards;
+pointer-events:none;
+z-index:1;
 }
-.nav-btn:hover { color: #e7549f; }
+
+@keyframes fall{
+0%{
+transform:translateY(-10px) rotate(0deg);
+opacity:1;
+}
+
+100%{
+transform:translateY(110vh) rotate(360deg);
+opacity:0.8;
+}
+}
