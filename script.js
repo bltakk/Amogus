@@ -8,7 +8,7 @@ let current = 0;
 const textEl = document.getElementById("text");
 const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
-const title = document.querySelector("h1");  // заголовок
+const title = document.querySelector("h1");
 
 function updatePage(){
 
@@ -17,12 +17,16 @@ textEl.textContent = pages[current];
 prevBtn.style.display = (current === 0) ? "none" : "inline";
 nextBtn.style.display = (current === pages.length-1) ? "none" : "inline";
 
-/* показываем заголовок только на 1 странице */
+/* заголовок только на 1 странице */
 if(current === 0){
 title.style.display = "block";
+textEl.style.marginTop = "0px";
 }
 else{
 title.style.display = "none";
+
+/* текст по центру карточки */
+textEl.style.marginTop = "40px";
 }
 
 }
