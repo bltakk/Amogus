@@ -65,16 +65,24 @@ function createPetal(){
 
   // Случайная позиция по всей ширине экрана (включая центр)
   const left = Math.random() * window.innerWidth;
-
   petal.style.left = left + "px";
-  petal.style.animationDuration = (5 + Math.random()*5) + "s";
-  petal.style.fontSize = (16 + Math.random()*12) + "px";
+
+  // случайная скорость анимации
+  const duration = 5 + Math.random() * 5;
+  petal.style.animationDuration = duration + "s";
+
+  // случайный размер
+  petal.style.fontSize = (16 + Math.random() * 12) + "px";
+
+  // добавляем небольшое случайное смещение X в начале
+  const offsetX = (Math.random() - 0.5) * 20; // ±10px
+  petal.style.transform = `translateX(${offsetX}px)`;
 
   document.body.appendChild(petal);
 
   setTimeout(()=>{
     petal.remove();
-  },11000);
+  }, duration * 1000 + 1000); // чуть больше, чем анимация
 }
 
 // создаём каждые 0.8 секунд
