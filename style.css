@@ -104,8 +104,9 @@ button:active{
 }
 
 /* пульсация падающих сердечек */
-.petal.heart-petal{
-  animation:fall linear forwards, pulse 1.2s infinite;
+.petal .heart-petal {
+  display:inline-block;
+  animation: pulse 1.2s infinite;
   transform-origin:center;
 }
 

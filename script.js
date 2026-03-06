@@ -61,11 +61,14 @@ function createPetal(){
   petal.classList.add("petal");
 
   const symbol = flowers[Math.floor(Math.random()*flowers.length)];
-  petal.innerHTML = symbol;
 
-  // Если это сердечко, добавляем пульсацию
-  if(symbol==="❤️" || symbol==="💗"){ 
-    petal.classList.add("heart-petal"); 
+  if(symbol==="❤️" || symbol==="💗"){
+    const heartSpan = document.createElement("span");
+    heartSpan.classList.add("heart-petal");
+    heartSpan.innerHTML = symbol;
+    petal.appendChild(heartSpan);
+  } else {
+    petal.innerHTML = symbol;
   }
 
   const left=Math.random()*window.innerWidth;
