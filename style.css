@@ -29,7 +29,7 @@ body{
 
 /* заголовок */
 h1{
-  font-size:22px;
+  font-size:26px;
   margin-bottom:15px;
   color:#d63384;
   white-space:nowrap; /* заголовок на одной строке */
@@ -37,7 +37,7 @@ h1{
 
 /* текст */
 .text{
-  font-size:16px;
+  font-size:22px;
   line-height:1.6;
 }
 
