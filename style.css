@@ -1,35 +1,54 @@
 body{
 margin:0;
-font-family:Georgia, serif;
+font-family:Georgia,serif;
 text-align:center;
-height:100vh;
+background-image:url("background.png");
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
 overflow:hidden;
-
-background:url('background.png') center/cover no-repeat;
-background-color:#ffe6f2;
 }
 
+/* карточка */
 .card{
 position:absolute;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
-background:rgba(255,255,255,0.8);
-padding:25px;
 width:90%;
-max-width:400px;
+max-width:420px;
+padding:25px;
+
+background:rgba(255,255,255,0.7);
 border-radius:20px;
+
 box-shadow:0 10px 25px rgba(0,0,0,0.2);
+
+z-index:5; /* выше цветов */
 }
 
+/* заголовок */
+h1{
+font-size:22px;
+margin-bottom:15px;
+}
+
+/* текст */
+.text{
+font-size:16px;
+line-height:1.6;
+}
+
+/* стрелки */
 .nav-btn{
 cursor:pointer;
-font-size:24px;
+font-size:30px;
 font-weight:bold;
-margin:0 10px;
+margin:0 12px;
 user-select:none;
 }
 
+/* кнопка */
 button{
 margin-top:15px;
 padding:8px 15px;
@@ -39,15 +58,15 @@ cursor:pointer;
 font-size:14px;
 }
 
-/* Падающие цветы */
-
+/* падающие цветы */
 .petal{
 position:fixed;
 top:-10px;
 font-size:20px;
 animation:fall linear forwards;
 pointer-events:none;
-z-index:1;
+
+z-index:1; /* теперь они за карточкой */
 }
 
 @keyframes fall{
@@ -55,7 +74,6 @@ z-index:1;
 transform:translateY(-10px) rotate(0deg);
 opacity:1;
 }
-
 100%{
 transform:translateY(110vh) rotate(360deg);
 opacity:0.8;
