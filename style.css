@@ -2,7 +2,7 @@ body{
   margin:0;
   font-family:Georgia,serif;
   text-align:center;
-  background-image:url("background.png");
+  background: linear-gradient(to bottom, rgba(255,255,255,0.1), rgba(255,255,255,0)), url("background.png");
   background-size:cover;
   background-position:center;
   background-attachment:fixed;
@@ -22,7 +22,7 @@ body{
   background:rgba(255,255,255,0.7);
   border-radius:20px;
 
-  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+  box-shadow:0 15px 30px rgba(0,0,0,0.25); /* мягкая тень для парящего эффекта */
 
   z-index:5;
 }
@@ -33,18 +33,20 @@ h1{
   margin-bottom:15px;
   color:#d63384;
   white-space:nowrap; /* заголовок на одной строке */
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2); /* тень для лучшей читаемости */
 }
 
 /* текст */
 .text{
-  font-size:24px;
+  font-size:16px;
   line-height:1.6;
+  text-shadow: 0.5px 0.5px 2px rgba(0,0,0,0.1); /* мягкая тень */
 }
 
-/* стрелки — только здесь сделано изменение */
+/* стрелки */
 .nav-btn{
   cursor:pointer;
-  font-size:36px; /* увеличено с 30px до 36px */
+  font-size:36px; /* увеличено для заметности */
   font-weight:bold;
   margin:0 16px;
   user-select:none;
@@ -78,6 +80,11 @@ button{
 button:hover{
   background:#ff3385;
   transform:scale(1.05);
+}
+
+button:active {
+  transform: scale(0.95); /* мягкое «подпрыгивание» при нажатии */
+  transition:0.1s;
 }
 
 /* падающие цветы и сердечки с колебанием */
