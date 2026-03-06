@@ -68,10 +68,7 @@ function createPetal(){
     heartSpan.innerHTML = symbol;
     petal.appendChild(heartSpan);
   } else {
-    const flowerSpan = document.createElement("span");
-    flowerSpan.classList.add("flower-span");
-    flowerSpan.innerHTML = symbol;
-    petal.appendChild(flowerSpan);
+    petal.innerHTML = symbol;
   }
 
   petal.style.left = Math.random()*100 + "vw";
