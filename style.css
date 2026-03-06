@@ -46,7 +46,7 @@ h1{
 /* стрелки */
 .nav-btn{
   cursor:pointer;
-  font-size:36px; /* увеличено для заметности */
+  font-size:50px; /* увеличено для заметности */
   font-weight:bold;
   margin:0 16px;
   user-select:none;
