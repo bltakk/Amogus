@@ -81,46 +81,38 @@ button:active{
   transition:0.1s;
 }
 
-/* падающие лепестки и цветы */
+/* падающие цветы */
 .petal{
   position:fixed;
   top:-10px;
+  font-size:20px;
+  animation:fall linear forwards;
   pointer-events:none;
   z-index:1;
-  animation: fall linear forwards;
 }
 
-/* анимация падения по Y */
+/* анимация падения */
 @keyframes fall{
-  0%{ transform: translateY(-10px); opacity:1; }
-  100%{ transform: translateY(110vh); opacity:0.8; }
-}
-
-/* колебание и пульсация для внутренних span */
-.petal .heart-petal{
-  display:inline-block;
-  animation: sway 3s ease-in-out infinite, pulse 1.2s infinite;
-  transform-origin:center;
-}
-
-/* колебание влево-вправо и вращение */
-@keyframes sway{
-  0% { transform: translateX(0) rotate(0deg); }
-  25% { transform: translateX(10px) rotate(10deg); }
-  50% { transform: translateX(0) rotate(0deg); }
-  75% { transform: translateX(-10px) rotate(-10deg); }
-  100% { transform: translateX(0) rotate(0deg); }
-}
-
-/* пульсация */
-@keyframes pulse{
-  0%{ transform: scale(1); }
-  50%{ transform: scale(1.35); }
-  100%{ transform: scale(1); }
+  0%{ transform:translateY(-10px) rotate(0deg); opacity:1; }
+  100%{ transform:translateY(110vh) rotate(360deg); opacity:0.8; }
 }
 
 /* пульсация сердечка в тексте */
 .heart{
   display:inline-block;
   animation:pulse 1.2s infinite;
+}
+
+/* пульсация падающих сердечек */
+.petal .heart-petal {
+  display:inline-block;
+  animation: pulse 1.2s infinite;
+  transform-origin:center;
+}
+
+/* keyframes пульсации */
+@keyframes pulse{
+  0%{ transform: scale(1); }
+  50%{ transform: scale(1.35); }
+  100%{ transform: scale(1); }
 }
