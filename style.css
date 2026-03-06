@@ -29,27 +29,27 @@ body{
 
 /* заголовок */
 h1{
-  font-size:22px;
+  font-size:26px;
   margin-bottom:15px;
   color:#d63384;
-  white-space:nowrap; /* оставляем на одной строке */
+  white-space:nowrap; /* заголовок на одной строке */
 }
 
 /* текст */
 .text{
-  font-size:16px;
+  font-size:22px;
   line-height:1.6;
 }
 
 /* стрелки */
 .nav-btn{
   cursor:pointer;
-  font-size:36px; /* увеличено для заметности */
+  font-size:30px;
   font-weight:bold;
   margin:0 16px;
   user-select:none;
 
-  color:#ff4da6; /* цвет оставляем прежним */
+  color:#ff4da6;
   transition:0.3s;
 }
 
@@ -80,7 +80,7 @@ button:hover{
   transform:scale(1.05);
 }
 
-/* падающие цветы и сердечки с колебанием */
+/* падающие цветы и сердечки */
 .petal{
   position:fixed;
   top:-10px;
@@ -93,20 +93,11 @@ button:hover{
 
 @keyframes fall{
   0%{
-    transform:translate(0px, -10px) rotate(0deg);
+    transform:translateY(-10px) rotate(0deg);
     opacity:1;
   }
-  25%{
-    transform:translate(-10px, 25vh) rotate(90deg);
-  }
-  50%{
-    transform:translate(10px, 50vh) rotate(180deg);
-  }
-  75%{
-    transform:translate(-5px, 75vh) rotate(270deg);
-  }
   100%{
-    transform:translate(0px, 110vh) rotate(360deg);
+    transform:translateY(110vh) rotate(360deg);
     opacity:0.8;
   }
 }
