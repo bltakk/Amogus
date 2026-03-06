@@ -1,9 +1,6 @@
 const pages = [
   "Թող գարունները գան ու չգնան… և որովհետև կինն է աշխարհի ամենաերկարատև գարունը։ Ու թող ձեր ժպիտներն ու դրական էներգիան միշտ լինեն բոլորի հարատև ուղեկիցը",
-  "Երկրորդ էջի տեքստ",
-  "Երրորդ էջի տեքստ",
-  "Չորրորդ էջի տեքստ",
-  "Հինգերորդ էջի տեքստ"
+  "Սիրով ԸԲՖ Ֆակուլտետային խորհուրդ ❤️" // Вторая страница с поздравлением
 ];
 
 let current = 0;
@@ -63,27 +60,23 @@ function createPetal(){
   petal.classList.add("petal");
   petal.innerHTML = flowers[Math.floor(Math.random()*flowers.length)];
 
-  // Случайная позиция по всей ширине экрана (включая центр)
   const left = Math.random() * window.innerWidth;
   petal.style.left = left + "px";
 
-  // случайная скорость анимации
-  const duration = 5 + Math.random() * 5;
+  const duration = 4 + Math.random() * 6; // скорость падения
   petal.style.animationDuration = duration + "s";
 
-  // случайный размер
-  petal.style.fontSize = (16 + Math.random() * 12) + "px";
+  const size = 14 + Math.random() * 18; // размер
+  petal.style.fontSize = size + "px";
 
-  // добавляем небольшое случайное смещение X в начале
-  const offsetX = (Math.random() - 0.5) * 20; // ±10px
+  const offsetX = (Math.random() - 0.5) * 30; // колебание ±15px
   petal.style.transform = `translateX(${offsetX}px)`;
 
   document.body.appendChild(petal);
 
   setTimeout(()=>{
     petal.remove();
-  }, duration * 1000 + 1000); // чуть больше, чем анимация
+  }, duration * 1000 + 1000);
 }
 
-// создаём каждые 0.8 секунд
 setInterval(createPetal,800);
