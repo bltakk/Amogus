@@ -41,10 +41,10 @@ h1{
   line-height:1.6;
 }
 
-/* стрелки */
+/* стрелки — только здесь сделано изменение */
 .nav-btn{
   cursor:pointer;
-  font-size:36px; /* увеличено для заметности */
+  font-size:36px; /* увеличено с 30px до 36px */
   font-weight:bold;
   margin:0 16px;
   user-select:none;
