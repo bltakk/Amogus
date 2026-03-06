@@ -59,16 +59,12 @@ btn.addEventListener("click",()=>{
 const flowers = ["🌸","🌷","❤️","🌺","💗"];
 
 function createPetal(){
-  const petal=document.createElement("div");
+  const petal = document.createElement("div");
   petal.classList.add("petal");
-  petal.innerHTML=flowers[Math.floor(Math.random()*flowers.length)];
+  petal.innerHTML = flowers[Math.floor(Math.random()*flowers.length)];
 
-  // случайная позиция за пределами карточки
-  const card = document.querySelector(".card");
-  const cardRect = card.getBoundingClientRect();
-  const left = Math.random() < 0.5
-    ? Math.random() * (cardRect.left - 30) // слева от карточки
-    : cardRect.right + 30 + Math.random() * (window.innerWidth - cardRect.right - 30); // справа от карточки
+  // Случайная позиция по всей ширине экрана (включая центр)
+  const left = Math.random() * window.innerWidth;
 
   petal.style.left = left + "px";
   petal.style.animationDuration = (5 + Math.random()*5) + "s";
