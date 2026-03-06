@@ -8,91 +8,80 @@ let current = 0;
 const textEl = document.getElementById("text");
 const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
-const title = document.querySelector("h1");  // заголовок
+const title = document.querySelector("h1");
 
-function updatePage() {
-  // Используем innerHTML, чтобы HTML-теги работали
+function updatePage(){
+  // innerHTML вместо textContent чтобы сердечко пульсировало
   textEl.innerHTML = pages[current];
 
-  // Управление стрелками
-  prevBtn.style.display = (current === 0) ? "none" : "inline";
-  nextBtn.style.display = (current === pages.length-1) ? "none" : "inline";
+  prevBtn.style.display = (current===0) ? "none" : "inline";
+  nextBtn.style.display = (current===pages.length-1) ? "none" : "inline";
 
-  // Заголовок только на первой странице
-  if(current === 0){
+  if(current===0){
     title.style.display = "block";
     textEl.style.marginTop = "0px";
   } else {
     title.style.display = "none";
-    // Центрируем текст на второй странице
-    textEl.style.marginTop = "40px";
+    textEl.style.marginTop = "40px"; // по центру
   }
 }
 
-// Инициализация
 updatePage();
 
-// Переключение страниц
-prevBtn.addEventListener("click", ()=>{
-  if(current > 0){
-    current--;
-    updatePage();
-  }
+prevBtn.addEventListener("click",()=>{
+  if(current>0){ current--; updatePage(); }
 });
 
-nextBtn.addEventListener("click", ()=>{
-  if(current < pages.length - 1){
-    current++;
-    updatePage();
-  }
+nextBtn.addEventListener("click",()=>{
+  if(current<pages.length-1){ current++; updatePage(); }
 });
 
-// Музыка
 let music;
-const btn = document.getElementById("playBtn");
+const btn=document.getElementById("playBtn");
 
-btn.addEventListener("click", ()=>{
+btn.addEventListener("click",()=>{
   if(!music){
-    music = new Audio("music.mp3");
-    music.loop = true;
-    music.volume = 0.2;
+    music=new Audio("music.mp3");
+    music.loop=true;
+    music.volume=0.2;
     music.play();
-    btn.textContent = "Կանգնեցնել 🎵";
+    btn.textContent="Կանգնեցնել 🎵";
   } else if(music.paused){
     music.play();
-    btn.textContent = "Կանգնեցնել 🎵";
+    btn.textContent="Կանգնեցնել 🎵";
   } else {
     music.pause();
-    btn.textContent = "Միացնել 🎵";
+    btn.textContent="Միացնել 🎵";
   }
 });
 
-// Цветы и сердечки
-const flowers = ["🌸","🌷","❤️","🌺","💗"];
+const flowers=["🌸","🌷","❤️","🌺","💗"];
 
 function createPetal(){
-  const petal = document.createElement("div");
+  const petal=document.createElement("div");
   petal.classList.add("petal");
 
-  petal.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
+  const symbol = flowers[Math.floor(Math.random()*flowers.length)];
+  petal.innerHTML = symbol;
 
-  const left = Math.random() * window.innerWidth;
-  petal.style.left = left + "px";
+  // если сердечко — добавляем пульсацию
+  if(symbol==="❤️" || symbol==="💗"){ petal.classList.add("heart-petal"); }
 
-  const duration = 4 + Math.random() * 6; // скорость падения
-  petal.style.animationDuration = duration + "s";
+  const left=Math.random()*window.innerWidth;
+  petal.style.left=left+"px";
 
-  const size = 14 + Math.random() * 18; // размер
-  petal.style.fontSize = size + "px";
+  const duration=4+Math.random()*6;
+  petal.style.animationDuration=duration+"s";
 
-  const offsetX = (Math.random() - 0.5) * 30; // колебание
-  petal.style.transform = `translateX(${offsetX}px)`;
+  const size=14+Math.random()*18;
+  petal.style.fontSize=size+"px";
+
+  const offsetX=(Math.random()-0.5)*30;
+  petal.style.transform=`translateX(${offsetX}px)`;
 
   document.body.appendChild(petal);
 
-  setTimeout(()=>{
-    petal.remove();
-  }, duration * 1000 + 1000);
+  setTimeout(()=>{ petal.remove(); }, duration*1000+1000);
 }
 
-setInterval(createPetal, 800);
+setInterval(createPetal,800);
