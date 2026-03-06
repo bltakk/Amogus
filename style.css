@@ -100,20 +100,25 @@ button:active{
   animation: fall linear forwards;
 }
 
-/* анимация падения по Y */
+/* падение по Y */
 @keyframes fall{
   0%{ transform: translateY(-10px); opacity:1; }
   100%{ transform: translateY(110vh); opacity:0.8; }
 }
 
-/* пульсация падающих сердечек */
-.petal .heart-petal{
+/* вращение и пульсация */
+.petal .heart-petal,
+.petal .flower-span {
   display:inline-block;
-  animation: pulse 1.2s infinite;
+  animation: rotateFlower 4s linear infinite, pulse 1.2s infinite;
   transform-origin:center;
 }
 
-/* keyframes пульсации */
+@keyframes rotateFlower {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 @keyframes pulse{
   0%{ transform: scale(1); }
   50%{ transform: scale(1.35); }
