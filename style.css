@@ -32,7 +32,7 @@ h1{
   font-size:22px;
   margin-bottom:15px;
   color:#d63384;
-  white-space:nowrap; /* оставляем на одной строке */
+  white-space:nowrap; /* заголовок на одной строке */
 }
 
 /* текст */
@@ -88,6 +88,7 @@ button:hover{
   animation:fall linear forwards;
   pointer-events:none;
   z-index:1; /* за карточкой */
+  will-change: transform; /* оптимизация анимации */
 }
 
 @keyframes fall{

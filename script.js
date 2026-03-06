@@ -55,7 +55,7 @@ btn.addEventListener("click",()=>{
   }
 });
 
-// Массив цветов с сердечками вместо 3-го и 5-го
+// Цветы и сердечки
 const flowers = ["🌸","🌷","❤️","🌺","💗"];
 
 function createPetal(){
@@ -64,16 +64,15 @@ function createPetal(){
   petal.innerHTML=flowers[Math.floor(Math.random()*flowers.length)];
 
   // случайная позиция за пределами карточки
-  let card = document.querySelector(".card");
-  let cardRect = card.getBoundingClientRect();
-  let left;
-  do {
-    left = Math.random() * window.innerWidth;
-  } while(left > cardRect.left - 30 && left < cardRect.right + 30);
+  const card = document.querySelector(".card");
+  const cardRect = card.getBoundingClientRect();
+  const left = Math.random() < 0.5
+    ? Math.random() * (cardRect.left - 30) // слева от карточки
+    : cardRect.right + 30 + Math.random() * (window.innerWidth - cardRect.right - 30); // справа от карточки
 
   petal.style.left = left + "px";
-  petal.style.animationDuration=(5+Math.random()*5)+"s";
-  petal.style.fontSize=(16+Math.random()*12)+"px";
+  petal.style.animationDuration = (5 + Math.random()*5) + "s";
+  petal.style.fontSize = (16 + Math.random()*12) + "px";
 
   document.body.appendChild(petal);
 
@@ -82,4 +81,5 @@ function createPetal(){
   },11000);
 }
 
-setInterval(createPetal,600);
+// создаём каждые 0.8 секунд
+setInterval(createPetal,800);
