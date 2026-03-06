@@ -1,101 +1,102 @@
 body{
-margin:0;
-font-family:Georgia,serif;
-text-align:center;
-background-image:url("background.png");
-background-size:cover;
-background-position:center;
-background-attachment:fixed;
-overflow:hidden;
+  margin:0;
+  font-family:Georgia,serif;
+  text-align:center;
+  background-image:url("background.png");
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+  overflow:hidden;
 }
 
 /* карточка */
 .card{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-width:90%;
-max-width:420px;
-padding:25px;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:90%;
+  max-width:420px;
+  padding:25px;
 
-background:rgba(255,255,255,0.7);
-border-radius:20px;
+  background:rgba(255,255,255,0.7);
+  border-radius:20px;
 
-box-shadow:0 10px 25px rgba(0,0,0,0.2);
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
 
-z-index:5;
+  z-index:5;
 }
 
 /* заголовок */
 h1{
-font-size:22px;
-margin-bottom:15px;
-color:#d63384;
+  font-size:22px;
+  margin-bottom:15px;
+  color:#d63384;
+  white-space:nowrap; /* оставляем на одной строке */
 }
 
 /* текст */
 .text{
-font-size:16px;
-line-height:1.6;
+  font-size:16px;
+  line-height:1.6;
 }
 
 /* стрелки */
 .nav-btn{
-cursor:pointer;
-font-size:30px;
-font-weight:bold;
-margin:0 16px;
-user-select:none;
+  cursor:pointer;
+  font-size:30px;
+  font-weight:bold;
+  margin:0 16px;
+  user-select:none;
 
-color:#ff4da6;
-transition:0.3s;
+  color:#ff4da6;
+  transition:0.3s;
 }
 
 .nav-btn:hover{
-color:#ff1a8c;
-transform:scale(1.2);
+  color:#ff1a8c;
+  transform:scale(1.2);
 }
 
 /* кнопка музыки */
 button{
-margin-top:15px;
-padding:8px 18px;
-border:none;
-border-radius:20px;
-cursor:pointer;
-font-size:14px;
+  margin-top:15px;
+  padding:8px 18px;
+  border:none;
+  border-radius:20px;
+  cursor:pointer;
+  font-size:14px;
 
-background:#ff66b3;
-color:white;
+  background:#ff66b3;
+  color:white;
 
-box-shadow:0 4px 10px rgba(255,105,180,0.4);
+  box-shadow:0 4px 10px rgba(255,105,180,0.4);
 
-transition:0.3s;
+  transition:0.3s;
 }
 
 button:hover{
-background:#ff3385;
-transform:scale(1.05);
+  background:#ff3385;
+  transform:scale(1.05);
 }
 
-/* падающие цветы */
+/* падающие цветы и сердечки */
 .petal{
-position:fixed;
-top:-10px;
-font-size:20px;
-animation:fall linear forwards;
-pointer-events:none;
-z-index:1;
+  position:fixed;
+  top:-10px;
+  font-size:20px;
+  animation:fall linear forwards;
+  pointer-events:none;
+  z-index:1; /* за карточкой */
 }
 
 @keyframes fall{
-0%{
-transform:translateY(-10px) rotate(0deg);
-opacity:1;
-}
-100%{
-transform:translateY(110vh) rotate(360deg);
-opacity:0.8;
-}
+  0%{
+    transform:translateY(-10px) rotate(0deg);
+    opacity:1;
+  }
+  100%{
+    transform:translateY(110vh) rotate(360deg);
+    opacity:0.8;
+  }
 }
