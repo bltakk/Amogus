@@ -90,14 +90,15 @@ button:active{
   transition:0.1s;
 }
 
-/* падающие лепестки и сердечки */
+/* падающие лепестки и сердечки с вращением */
 .petal{
   position:fixed;
   top:-10px;
   pointer-events:none;
   z-index:1;
   font-size:4vw;
-  animation: fall linear forwards;
+  animation: fall linear forwards, rotateFlower 4s linear infinite;
+  transform-origin:center;
 }
 
 /* падение по Y */
@@ -106,29 +107,29 @@ button:active{
   100%{ transform: translateY(110vh); opacity:0.8; }
 }
 
-/* вращение и пульсация */
-.petal .heart-petal,
-.petal .flower-span {
-  display:inline-block;
-  animation: rotateFlower 4s linear infinite, pulse 1.2s infinite;
-  transform-origin:center;
-}
-
+/* вращение всего элемента */
 @keyframes rotateFlower {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
-@keyframes pulse{
-  0%{ transform: scale(1); }
-  50%{ transform: scale(1.35); }
-  100%{ transform: scale(1); }
+/* пульсация сердечек внутри */
+.petal .heart-petal{
+  display:inline-block;
+  animation:pulse 1.2s infinite;
+  transform-origin:center;
 }
 
 /* пульсация сердечка в тексте */
 .heart{
   display:inline-block;
   animation:pulse 1.2s infinite;
+}
+
+@keyframes pulse{
+  0%{ transform: scale(1); }
+  50%{ transform: scale(1.35); }
+  100%{ transform: scale(1); }
 }
 
 /* медиазапросы для адаптивности */
