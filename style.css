@@ -24,13 +24,14 @@ border-radius:20px;
 
 box-shadow:0 10px 25px rgba(0,0,0,0.2);
 
-z-index:5; /* выше цветов */
+z-index:5;
 }
 
 /* заголовок */
 h1{
 font-size:22px;
 margin-bottom:15px;
+color:#d63384;
 }
 
 /* текст */
@@ -46,16 +47,36 @@ font-size:30px;
 font-weight:bold;
 margin:0 12px;
 user-select:none;
+
+color:#ff4da6;
+transition:0.3s;
 }
 
-/* кнопка */
+.nav-btn:hover{
+color:#ff1a8c;
+transform:scale(1.2);
+}
+
+/* кнопка музыки */
 button{
 margin-top:15px;
-padding:8px 15px;
+padding:8px 18px;
 border:none;
-border-radius:12px;
+border-radius:20px;
 cursor:pointer;
 font-size:14px;
+
+background:#ff66b3;
+color:white;
+
+box-shadow:0 4px 10px rgba(255,105,180,0.4);
+
+transition:0.3s;
+}
+
+button:hover{
+background:#ff3385;
+transform:scale(1.05);
 }
 
 /* падающие цветы */
@@ -65,8 +86,7 @@ top:-10px;
 font-size:20px;
 animation:fall linear forwards;
 pointer-events:none;
-
-z-index:1; /* теперь они за карточкой */
+z-index:1;
 }
 
 @keyframes fall{
