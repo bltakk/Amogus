@@ -86,15 +86,24 @@ button:active{
   position:fixed;
   top:-10px;
   font-size:20px;
-  animation:fall linear forwards;
   pointer-events:none;
   z-index:1;
+  animation: fall linear forwards, sway 3s ease-in-out infinite;
 }
 
 /* анимация падения */
 @keyframes fall{
   0%{ transform:translateY(-10px) rotate(0deg); opacity:1; }
   100%{ transform:translateY(110vh) rotate(360deg); opacity:0.8; }
+}
+
+/* колебание лепестков влево-вправо */
+@keyframes sway {
+  0% { transform: translateX(0) translateY(0) rotate(0deg); }
+  25% { transform: translateX(10px) translateY(0) rotate(10deg); }
+  50% { transform: translateX(0) translateY(0) rotate(0deg); }
+  75% { transform: translateX(-10px) translateY(0) rotate(-10deg); }
+  100% { transform: translateX(0) translateY(0) rotate(0deg); }
 }
 
 /* пульсация сердечка в тексте */
@@ -104,7 +113,7 @@ button:active{
 }
 
 /* пульсация падающих сердечек */
-.petal .heart-petal {
+.petal .heart-petal{
   display:inline-block;
   animation: pulse 1.2s infinite;
   transform-origin:center;
