@@ -57,7 +57,7 @@ btn.addEventListener("click",()=>{
 const flowers=["🌸","🌷","❤️","🌺","💗"];
 
 function createPetal(){
-  const petal=document.createElement("div");
+  const petal = document.createElement("div");
   petal.classList.add("petal");
 
   const symbol = flowers[Math.floor(Math.random()*flowers.length)];
@@ -71,21 +71,13 @@ function createPetal(){
     petal.innerHTML = symbol;
   }
 
-  const left=Math.random()*window.innerWidth;
-  petal.style.left=left+"px";
-
-  const duration=4+Math.random()*6;
-  petal.style.animationDuration=duration+"s";
-
-  const size=14+Math.random()*18;
-  petal.style.fontSize=size+"px";
-
-  const offsetX=(Math.random()-0.5)*30;
-  petal.style.transform=`translateX(${offsetX}px)`;
+  petal.style.left = Math.random()*100 + "vw";
+  const duration = 4 + Math.random()*6;
+  petal.style.animationDuration = duration+"s";
 
   document.body.appendChild(petal);
 
-  setTimeout(()=>{ petal.remove(); }, duration*1000+1000);
+  setTimeout(()=>petal.remove(), duration*1000 + 1000);
 }
 
 setInterval(createPetal,800);

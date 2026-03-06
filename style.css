@@ -15,19 +15,24 @@ body{
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
-  width:90%;
+  width:90vw;
   max-width:420px;
-  padding:25px;
+  padding:5vw;
   background:rgba(255,255,255,0.7);
   border-radius:20px;
   box-shadow:0 10px 25px rgba(0,0,0,0.2);
   z-index:5;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
 }
 
 /* заголовок */
 h1{
-  font-size:16px;
-  margin-bottom:15px;
+  font-size:4vw;
+  max-font-size:16px;
+  margin-bottom:2vw;
   color:#d63384;
   white-space:nowrap;
   text-shadow:2px 2px 6px rgba(0,0,0,0.25);
@@ -35,17 +40,20 @@ h1{
 
 /* текст */
 .text{
-  font-size:18px;
+  font-size:4.5vw;
+  max-font-size:18px;
   line-height:1.6;
   text-shadow:1px 1px 4px rgba(0,0,0,0.2);
+  text-align:center;
 }
 
 /* стрелки */
 .nav-btn{
   cursor:pointer;
-  font-size:36px;
-  font-weight:1400;
-  margin:0 16px;
+  font-size:9vw;
+  max-font-size:36px;
+  font-weight:900;
+  margin:0 3vw;
   user-select:none;
   color:#ff4da6;
   transition:0.3s;
@@ -59,12 +67,13 @@ h1{
 
 /* кнопка музыки */
 button{
-  margin-top:15px;
-  padding:8px 18px;
+  margin-top:3vw;
+  padding:1.5vw 4vw;
   border:none;
   border-radius:20px;
   cursor:pointer;
-  font-size:14px;
+  font-size:3.5vw;
+  max-font-size:14px;
   background:#ff66b3;
   color:white;
   box-shadow:0 4px 10px rgba(255,105,180,0.4);
@@ -81,30 +90,24 @@ button:active{
   transition:0.1s;
 }
 
-/* падающие цветы */
+/* падающие лепестки и сердечки */
 .petal{
   position:fixed;
   top:-10px;
-  font-size:20px;
-  animation:fall linear forwards;
   pointer-events:none;
   z-index:1;
+  font-size:4vw;
+  animation: fall linear forwards;
 }
 
-/* анимация падения */
+/* анимация падения по Y */
 @keyframes fall{
-  0%{ transform:translateY(-10px) rotate(0deg); opacity:1; }
-  100%{ transform:translateY(110vh) rotate(360deg); opacity:0.8; }
-}
-
-/* пульсация сердечка в тексте */
-.heart{
-  display:inline-block;
-  animation:pulse 1.2s infinite;
+  0%{ transform: translateY(-10px); opacity:1; }
+  100%{ transform: translateY(110vh); opacity:0.8; }
 }
 
 /* пульсация падающих сердечек */
-.petal .heart-petal {
+.petal .heart-petal{
   display:inline-block;
   animation: pulse 1.2s infinite;
   transform-origin:center;
@@ -115,4 +118,18 @@ button:active{
   0%{ transform: scale(1); }
   50%{ transform: scale(1.35); }
   100%{ transform: scale(1); }
+}
+
+/* пульсация сердечка в тексте */
+.heart{
+  display:inline-block;
+  animation:pulse 1.2s infinite;
+}
+
+/* медиазапросы для адаптивности */
+@media (min-width: 480px){
+  h1{ font-size:16px; }
+  .text{ font-size:18px; }
+  .nav-btn{ font-size:36px; }
+  button{ font-size:14px; }
 }
